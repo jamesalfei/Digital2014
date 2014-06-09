@@ -20,8 +20,10 @@ error_reporting(-1);
 		       	echo login($_POST['username'], $_POST['password']);
 		        break;
 				
-			case "SEARCH":
-				JSON_Search($_POST['keyword'], $_POST['search']);
+			case "GETBEACONID":
+				require_once 'beacon.php';
+				echo getHoleDate($_POST['usrToken'], $_POST['beaconID']);
+				
 				break;
 
 		}

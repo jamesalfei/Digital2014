@@ -13,4 +13,6 @@ public interface NetworkCommsFeedback {
 	public void onLoginComplete(boolean success, String token);
 
 	public void onLogoutComplete(boolean success);
+
+	public void onCheckComplete(String status);
 }

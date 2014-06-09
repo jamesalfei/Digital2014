@@ -60,6 +60,7 @@ public class LoginActivity extends Activity implements NetworkCommsFeedback {
 	@Override
 	public void onLoginComplete(boolean success, String token) {
 		// when logged in, go to Main activity
+		// new CheckLogin(token, feedback).execute();
 		if (success) {
 			startActivity(new Intent(this, MainActivity.class));
 		} else {
@@ -70,6 +71,11 @@ public class LoginActivity extends Activity implements NetworkCommsFeedback {
 
 	@Override
 	public void onLogoutComplete(boolean success) {
-		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void onCheckComplete(String status) {
+		Toast.makeText(this, status, Toast.LENGTH_LONG).show();
+
 	}
 }

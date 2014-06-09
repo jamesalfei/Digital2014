@@ -2,6 +2,8 @@ package com.eyerange.app;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import android.app.Activity;
@@ -84,10 +86,17 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 		return true;
 	}
 
-	private void updateList() {
+	private void updateList(ArrayList<IBeacon> device) {
+		for (IBeacon dev : device) {
+			if (dev.getAccuracy() > 0) {
+				deviceNames.add("Accuracy: " + dev.getAccuracy() + "m\n"
+						+ "UUID: " + dev.getProximityUuid() + "\n" + "Major: "
+						+ dev.getMajor() + "\n" + "Minor: " + dev.getMinor());
+			}
+		}
+
 		arrayAdapter = new ArrayAdapter<String>(cont,
 				android.R.layout.simple_list_item_1, deviceNames);
-
 		list.setAdapter(arrayAdapter);
 	}
 
@@ -101,6 +110,15 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void sortList(ArrayList<IBeacon> devices) {
+		Collections.sort(devices, new Comparator<IBeacon>() {
+			@Override
+			public int compare(IBeacon s1, IBeacon s2) {
+				return Double.compare(s1.getAccuracy(), s2.getAccuracy());
+			}
+		});
 	}
 
 	@Override
@@ -119,15 +137,16 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 						IBeacon device = itt.next();
 						if (!devices.contains(device)) {
 							devices.add(device);
-							deviceNames.add(device.getProximity() + "m");
 						}
 					}
+
+					sortList(devices);
 
 					runOnUiThread(new Runnable() {
 
 						@Override
 						public void run() {
-							updateList();
+							updateList(devices);
 						}
 					});
 				}

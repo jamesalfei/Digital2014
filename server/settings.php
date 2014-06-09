@@ -1,6 +1,6 @@
 <?php
-$host = 'localhost';
-$username= 'eyerange';
-$password = 'hackathon';
-$db = 'eyerange';
+$db_host = 'localhost';
+$db_username= 'eyerange';
+$db_password = 'hackathon';
+$db_db = 'eyerange';
 ?>

@@ -8,7 +8,8 @@ error_reporting(-1);
 	$request = $_POST['request_type'];
 
 	if($type == "JSON"){
-		require_once('functions.php');
+		require_once ('settings.php');
+		require_once('dbconnect.php');
 		switch ($request) {
 		    case "REGISTER":
 				require_once 'login.php';

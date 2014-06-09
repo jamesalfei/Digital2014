@@ -1,28 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
-    </style>
-    
-    <!-- This bit of code changes something -->
-    <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
-    <item name="android:actionBarStyle">@style/ActionBarStyle</item>
-</style>
+	<!-- Base application theme, dependent on API level. This theme is replaced 
+		by AppBaseTheme from res/values-vXX/styles.xml on newer devices. -->
+	<style name="AppBaseTheme" parent="android:Theme.Light">
+		<!-- Theme customizations available in newer API levels can go in res/values-vXX/styles.xml, 
+			while customizations related to backward-compatibility can go here. -->
+	</style>
 
-<style name="ActionBarStyle" parent="android:style/Widget.Holo.Light.ActionBar">     
-    <item name="android:colorBackground">#669934</item>
-    <item name="android:background">#669934</item>
-    <item name="android:textColor">#000000</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:textSize">16sp</item>
-</style>
+	<!-- This bit of code changes something -->
+	<style name="AppTheme" parent="@android:style/Theme.Holo.Light">
+		<item name="android:actionBarStyle">@style/ActionBarStyle</item>
+	</style>
+
+	<style name="ActionBarStyle" parent="android:style/Widget.Holo.Light.ActionBar">
+		<item name="android:colorBackground">#669934</item>
+		<item name="android:background">#669934</item>
+		<item name="android:textColor">#FFFFFF</item>
+		<item name="android:textSize">16sp</item>
+	</style>
+
+	<!-- Colors -->
+	<color name="transGreen">#CC669934</color>
+	<color name="titleGreen">#669934</color>
+	<color name="transWhite">#8FFF</color>
 
 </resources>

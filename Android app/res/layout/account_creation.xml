@@ -31,14 +31,36 @@
         android:ems="10"
         android:inputType="textPassword" />
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/username"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp"
+        android:text="@string/register"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/passwordTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/password"
+        android:layout_below="@+id/password"
+        android:layout_marginTop="24dp"
+        android:background="@color/transWhite"
+        android:ems="10"
+        android:hint="@string/passwordRetype"
+        android:inputType="textPassword" />
+
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/titleGreen"
-        android:layout_below="@+id/password"
+        android:layout_below="@+id/passwordTwo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/login" />
+        android:layout_marginTop="24dp"
+        android:background="@color/titleGreen"
+        android:text="@string/submit" />
 
 </RelativeLayout>

@@ -21,7 +21,7 @@ import backgroundTasks.Login;
  * this will eventually need to check if the user is already logged in and go
  * straight to the main activity
  * 
- * @author James
+ * @author James << FUCKING BENDER
  */
 public class LoginActivity extends Activity implements NetworkCommsFeedback {
 

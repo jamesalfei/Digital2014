@@ -28,7 +28,7 @@
         </activity>
         <activity android:name="utilities.Scanner" >
         </activity>
-        <activity android:name="MainActivity" >
+        <activity android:name="com.eyerange.app.MainActivity" >
         </activity>
         <activity android:name="networkUtilities.JSONParser" >
         </activity>
@@ -55,6 +55,11 @@
             android:label="iBeacon"
             android:permission="android.permission.BLUETOOTH" >
         </service>
+
+        <activity
+            android:name="com.eyerange.app.HoleActivity"
+            android:label="@string/title_activity_hole" >
+        </activity>
     </application>
 
 </manifest>

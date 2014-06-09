@@ -10,5 +10,6 @@
     <string name="hole">Hole:</string>
     <string name="par">Par:</string>
     <string name="description">Description:</string>
+    <string name="title_activity_hole">Hole</string>
 
 </resources>

@@ -22,7 +22,7 @@ public class Login extends AsyncTask<String, String, String> {
 
 	// JSON node/tag names
 	JSONParser jParser = new JSONParser();
-	boolean success, honbuUser;
+	boolean success;
 
 	public Login(String username, String password, NetworkCommsFeedback response) {
 		this.username = username;
@@ -50,9 +50,13 @@ public class Login extends AsyncTask<String, String, String> {
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair(Constants.TAG_USERNAME, username));
 			params.add(new BasicNameValuePair(Constants.TAG_PASSWORD, password));
+			params.add(new BasicNameValuePair(Constants.REQUEST_TYPE,
+					Constants.REQUEST_LOGIN));
+			params.add(new BasicNameValuePair(Constants.CONTENT_TYPE,
+					Constants.TYPE_JSON));
 
 			// getting product details by making HTTP request
-			JSONObject json = jParser.makeHTTPRequest(Constants.URL_LOGIN,
+			JSONObject json = jParser.makeHTTPRequest(Constants.URL_API,
 					Constants.HTTP_POST, params);
 
 			// check your log for json response
@@ -62,7 +66,7 @@ public class Login extends AsyncTask<String, String, String> {
 			success = json.getBoolean(Constants.TAG_SUCCESS);
 
 			if (success) {
-				// do something here
+				userID = json.getString(Constants.TAG_AUTH);
 			}
 
 		} catch (JSONException e) {
@@ -77,7 +81,7 @@ public class Login extends AsyncTask<String, String, String> {
 	 * **/
 	@Override
 	protected void onPostExecute(String file_url) {
-		response.onLoginComplete(success, honbuUser, userID);
+		response.onLoginComplete(success, userID);
 	}
 
 }

@@ -7,6 +7,12 @@ import networkUtilities.NetworkCommsFeedback;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import backgroundTasks.Login;
 
 /**
  * This is the first screen the user will see. This class logs the user into the
@@ -19,27 +25,47 @@ import android.os.Bundle;
  */
 public class LoginActivity extends Activity implements NetworkCommsFeedback {
 
+	EditText user, pass;
+	Button submit;
+	NetworkCommsFeedback feedback;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
+
+		feedback = this;
 
 		setupInterfaceComponents();
 		setupActionListeners();
 	}
 
 	private void setupActionListeners() {
-		// add button action listeners here
+		submit.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new Login(user.getText().toString(), pass.getText().toString(),
+						feedback).execute();
+			}
+		});
 	}
 
 	private void setupInterfaceComponents() {
-		// setup all interface components here
+		user = (EditText) findViewById(R.id.username);
+		pass = (EditText) findViewById(R.id.password);
+		submit = (Button) findViewById(R.id.submitButton);
 	}
 
 	@Override
-	public void onLoginComplete(boolean success, boolean honbuUser, String token) {
+	public void onLoginComplete(boolean success, String token) {
 		// when logged in, go to Main activity
-		startActivity(new Intent(this, MainActivity.class));
+		if (success) {
+			startActivity(new Intent(this, MainActivity.class));
+		} else {
+			Toast.makeText(this, "Incorrect login details!", Toast.LENGTH_SHORT)
+					.show();
+		}
 	}
 
 	@Override

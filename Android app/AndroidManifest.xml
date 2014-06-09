@@ -9,6 +9,8 @@
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
@@ -30,6 +32,29 @@
         </activity>
         <activity android:name="networkUtilities.JSONParser" >
         </activity>
+
+        <service
+            android:name="com.radiusnetworks.ibeacon.IBeaconIntentProcessor"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BLUETOOTH" >
+            <meta-data
+                android:name="background"
+                android:value="true" />
+
+            <intent-filter android:priority="1" >
+                <action android:name="uk.ac.aber.astute.mfc1.ibeacon_demo.DID_RANGING" />
+                <action android:name="uk.ac.aber.astute.mfc1.ibeacon_demo.DID_MONITORING" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.radiusnetworks.ibeacon.service.IBeaconService"
+            android:enabled="true"
+            android:exported="true"
+            android:isolatedProcess="false"
+            android:label="iBeacon"
+            android:permission="android.permission.BLUETOOTH" >
+        </service>
     </application>
 
 </manifest>

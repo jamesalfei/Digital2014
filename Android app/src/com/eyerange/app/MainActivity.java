@@ -5,11 +5,15 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.radiusnetworks.ibeacon.IBeacon;
 import com.radiusnetworks.ibeacon.IBeaconConsumer;
@@ -30,14 +34,29 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 	private final IBeaconManager iBeaconManager = IBeaconManager
 			.getInstanceForApplication(this);
 	private ArrayList<IBeacon> devices;
+	ArrayList<String> deviceNames;
+	Context cont;
+	ArrayAdapter<String> arrayAdapter;
+
+	TextView authToken;
+	ListView list;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		setupComponents();
+		cont = this;
+
 		iBeaconManager.bind(this);
 		devices = new ArrayList<IBeacon>();
+		deviceNames = new ArrayList<String>();
+	}
+
+	private void setupComponents() {
+		authToken = (TextView) findViewById(R.id.authToken);
+		list = (ListView) findViewById(R.id.iBeaconList);
 	}
 
 	@Override
@@ -47,10 +66,29 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 	}
 
 	@Override
+	protected void onPause() {
+		super.onPause();
+		iBeaconManager.unBind(this);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		iBeaconManager.bind(this);
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+	private void updateList() {
+		arrayAdapter = new ArrayAdapter<String>(cont,
+				android.R.layout.simple_list_item_1, deviceNames);
+
+		list.setAdapter(arrayAdapter);
 	}
 
 	@Override
@@ -68,12 +106,12 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 	@Override
 	public void onIBeaconServiceConnect() {
 		iBeaconManager.setRangeNotifier(new RangeNotifier() {
-
 			@Override
 			public void didRangeBeaconsInRegion(Collection<IBeacon> arg0,
 					Region arg1) {
 
 				devices.clear();
+				deviceNames.clear();
 
 				if (arg0.size() > 0) {
 					Iterator<IBeacon> itt = arg0.iterator();
@@ -81,10 +119,17 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 						IBeacon device = itt.next();
 						if (!devices.contains(device)) {
 							devices.add(device);
+							deviceNames.add(device.getProximity() + "m");
 						}
 					}
 
-					// show main device in text view here
+					runOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							updateList();
+						}
+					});
 				}
 			}
 		});

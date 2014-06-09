@@ -57,7 +57,6 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 	}
 
 	private void setupComponents() {
-		authToken = (TextView) findViewById(R.id.authToken);
 		list = (ListView) findViewById(R.id.iBeaconList);
 	}
 

@@ -14,4 +14,5 @@
     <string name="title_activity_hole">Hole</string>
     <string name="register">Register</string>
 	<string name="submit">Submit</string>
+	<string name="notamember">Not a member? Tap Here</string>
 </resources>

@@ -24,5 +24,6 @@
 	<color name="transGreen">#CC669934</color>
 	<color name="titleGreen">#669934</color>
 	<color name="transWhite">#8FFF</color>
+	<color name="white">#FFFFFF</color>
 
 </resources>

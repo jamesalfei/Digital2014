@@ -3,12 +3,12 @@
 
     <string name="app_name">EyeRange</string>
     <string name="hello_world">Hello world!</string>
-	<string name="usernameHint">Username</string>
-	<string name="passwordHint">Password</string>
-	<string name="login">Login</string>
+    <string name="usernameHint">Username</string>
+    <string name="passwordHint">Password</string>
+    <string name="login">Login</string>
     <string name="action_settings">Settings</string>
-    <string name="par">Par:</string>
-    <string name="hole">Hole:</string>
-    <string name="description">Description:</string>
+    <string name="hole">Hole</string>
+    <string name="par">Par</string>
+    <string name="description">Description</string>
 
 </resources>

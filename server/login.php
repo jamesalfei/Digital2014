@@ -8,7 +8,7 @@ function login($user, $paswrd){
 	global $con;
 	$sql  = "SELECT * FROM Account WHERE Username = '$user'";
 	$response;
-	$reply = array();
+	
 	if (!mysqli_query($con,$sql)){
 		die('Error: ' . mysqli_error($con));
 		$response = FALSE;
@@ -18,18 +18,15 @@ function login($user, $paswrd){
 		//echo $demo+'<br/>';
 		$password =  hash("sha512",$demo.$result['Salt']); 
 		//echo $password;
-
 		if($result['Password'] == $password){
 			$response = TRUE;
-			require_once 'functions.php';
-			session_start();
-			$token  = genToken();
-			$_SESSION['token'] = $token;
-			$reply['token'] = $token;
+			
+
 		} else{
 			$response = FALSE;
 		}
 	}
+	$reply = array();
 	$reply['response'] = $response;
 	return json_encode($reply);
 }

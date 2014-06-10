@@ -23,7 +23,22 @@ error_reporting(-1);
 			case "GETBEACONID":
 				require_once 'beacon.php';
 				echo getHoleDate($_POST['usrToken'], $_POST['beaconID']);
-				
+				break;
+			case "ADDHOLESCORE":
+				require_once 'GameScore.php';
+				echo addHoleScore($_POST['usrToken'],$_POST['usrToken'], $_POST['usrToken']);
+				break;
+			case "ADDFINALSCORE":
+				require_once 'GameScore.php';
+				echo addFinalScore($_POST['courseID'], $_POST['score'], $_POST['usrToken'], $_POST['weather']);
+				break;
+			case "GETHOLESCORE":
+				require_once 'GameScore.php';
+				echo getYourHoleScores($_POST['usrToken'], $_POST['holeID']);
+				break;
+			case "GETFINALSCORE":
+				require_once 'GameScore.php';
+				echo getYourGameScores($_POST['usrToken'], $_POST['courseID']);
 				break;
 
 		}

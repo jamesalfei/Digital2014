@@ -29,20 +29,11 @@
     <string name="title_activity_result">Result</string>
     <string name="noofstrokes">Number of strokes</string>
     <string name="submitdata">Submit</string>
-<<<<<<< HEAD
-    
     <!-- Results Page String -->
     <string name="date">Date</string>
     <string name="score">Score</string>
     <string name="weather">Weather</string>
     
-    
-    
-=======
-    <string name="title_activity_result">Result</string>
-    <string name="noofstrokes">Number of strokes</string>
-    <string name="submitdata">Submit</string>
->>>>>>> 1efa9c7a63adf01005e5fb9b94aaff29157cbaab
 
 
 </resources>

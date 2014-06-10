@@ -26,6 +26,7 @@ function login($user, $paswrd){
 			require ('functions.php');
 			$token  = genToken();
 			$_SESSION['token'] = $token;
+			$_SESSION['userid'] = $user;
 			//echo $token;
 			$reply['token'] = $token;
 		} else{

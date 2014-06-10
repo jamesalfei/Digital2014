@@ -26,6 +26,9 @@
     <string name="pleasegotohole">"Please go to hole "</string>
     <string name="didyouknow">Did you know?</string>
     <string name="distohole">Distance to hole:</string>
+    <string name="title_activity_result">Result</string>
+    <string name="noofstrokes">Number of strokes</string>
+    <string name="submitdata">Submit</string>
 <<<<<<< HEAD
     
     <!-- Results Page String -->

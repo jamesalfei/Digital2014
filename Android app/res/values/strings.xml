@@ -17,13 +17,17 @@
     <!-- Register Page Strings -->
     <string name="register">Register</string>
     <string name="submit">Submit</string>
-	<!-- Main menu Strings -->
-	<string name="newGame">New Game</string>
-	<string name="myStats">My Statistics</string>
-	<!-- Image Description Strings -->
-	<string name="imageDescription">Banging Image Bro</string>
+    <!-- Main menu Strings -->
+    <string name="newGame">New Game</string>
+    <string name="myStats">My Statistics</string>
+    <!-- Image Description Strings -->
+    <string name="imageDescription">Banging Image Bro</string>
     <string name="title_activity_go_to_hole">GoToHole</string>
     <string name="pleasegotohole">"Please go to hole "</string>
     <string name="didyouknow">Did you know?</string>
     <string name="distohole">Distance to hole:</string>
+    <string name="title_activity_result">Result</string>
+    <string name="noofstrokes">Number of strokes</string>
+    <string name="submitdata">Submit</string>
+
 </resources>

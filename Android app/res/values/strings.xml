@@ -13,6 +13,7 @@
     <string name="description">Description:</string>
     <string name="title_activity_hole">Hole</string>
     <string name="register">Register</string>
+<<<<<<< HEAD
 	<string name="submit">Submit</string>
 	<string name="notamember">Not a member? Tap Here</string>
 	<!-- Main menu Strings -->
@@ -21,4 +22,13 @@
 	<!-- Image Description Strings -->
 	<string name="imageDescription">Banging Image Bro</string>
 	
+=======
+    <string name="submit">Submit</string>
+    <string name="notamember">Not a member? Tap Here</string>
+    <string name="title_activity_go_to_hole">GoToHole</string>
+    <string name="pleasegotohole">"Please go to hole "</string>
+    <string name="didyouknow">Did you know?</string>
+    <string name="distohole">Distance to hole:</string>
+
+>>>>>>> 5b26838c1208e18a6a923daa0b3620a616e726bc
 </resources>

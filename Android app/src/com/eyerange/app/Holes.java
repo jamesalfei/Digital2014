@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import networkUtilities.NetworkCommsFeedback;
 import utilities.Constants;
 import android.app.Activity;
 import android.content.Context;
@@ -16,7 +17,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.radiusnetworks.ibeacon.IBeacon;
@@ -25,16 +25,8 @@ import com.radiusnetworks.ibeacon.IBeaconManager;
 import com.radiusnetworks.ibeacon.RangeNotifier;
 import com.radiusnetworks.ibeacon.Region;
 
-/**
- * Class will be shown after login and will start detecting ibeacons (possibly
- * for the start of a course)
- * 
- * This service will continue until the game is ended
- * 
- * @author James Alfei
- */
-public class MainActivity extends Activity implements IBeaconConsumer {
-
+public class Holes extends Activity implements IBeaconConsumer,
+		NetworkCommsFeedback {
 	private final IBeaconManager iBeaconManager = IBeaconManager
 			.getInstanceForApplication(this);
 	private ArrayList<IBeacon> devices;
@@ -42,15 +34,14 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 	Context cont;
 	ArrayAdapter<String> arrayAdapter;
 	Bundle i;
+	String holeID, distanceToPin, par = "";
 	String token;
-
-	TextView authToken;
-	ListView list;
+	TextView holeText, parText, descText, distText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_hole);
 
 		setupComponents();
 		cont = this;
@@ -58,13 +49,19 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 		i = getIntent().getExtras();
 		token = i.getString("token");
 
+		// when start, get hole 1 from server
+		// then fill in the details of the text views (etc.)
+
 		iBeaconManager.bind(this);
 		devices = new ArrayList<IBeacon>();
 		deviceNames = new ArrayList<String>();
 	}
 
 	private void setupComponents() {
-		list = (ListView) findViewById(R.id.iBeaconList);
+		holeText = (TextView) findViewById(R.id.textHole);
+		parText = (TextView) findViewById(R.id.textPar);
+		descText = (TextView) findViewById(R.id.textDescription);
+		distText = (TextView) findViewById(R.id.textDistance);
 	}
 
 	@Override
@@ -100,10 +97,6 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 						+ dev.getMajor() + "\n" + "Minor: " + dev.getMinor());
 			}
 		}
-
-		arrayAdapter = new ArrayAdapter<String>(cont,
-				android.R.layout.simple_list_item_1, deviceNames);
-		list.setAdapter(arrayAdapter);
 	}
 
 	@Override
@@ -172,8 +165,7 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 	protected void checkDevices(ArrayList<IBeacon> devices) {
 		for (IBeacon dev : devices) {
 			if ((dev.getMajor() == Constants.FIRST_MAJOR)
-					&& ((dev.getMinor() == Constants.FIRST_MINOR) && (dev
-							.getAccuracy() < 1))) {
+					&& (dev.getMinor() == Constants.FIRST_MINOR)) {
 				// switch to holes tab when detected our first beacon and pass
 				// token.
 				Intent i = new Intent(this, Holes.class);
@@ -183,6 +175,33 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 				startActivity(i);
 			}
 		}
+
+	}
+
+	@Override
+	public void onLoginComplete(boolean success, String token) {
+	}
+
+	@Override
+	public void onLogoutComplete(boolean success) {
+	}
+
+	@Override
+	public void onCheckComplete(String status) {
+	}
+
+	@Override
+	public void onGotHoleDetails(String holeID, String distanceToPin, String par) {
+		this.holeID = holeID;
+		this.distanceToPin = distanceToPin;
+		this.par = par;
+		updateText();
+	}
+
+	private void updateText() {
+		holeText.setText(holeID);
+		distText.setText(distanceToPin);
+		parText.setText(par);
 
 	}
 }

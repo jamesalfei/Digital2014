@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transGreen"
+    tools:context="com.eyerange.app.GoToHole"
+    tools:ignore="MergeRootFrame" >
+    
+    <TextView
+        android:id="@+id/gotoholen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/pleasegotohole" />
+    
+    <TextView
+        android:id="@+id/didyouknow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gotoholen"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/didyouknow"
+        android:color="@color/white" />
+
+</RelativeLayout>
+

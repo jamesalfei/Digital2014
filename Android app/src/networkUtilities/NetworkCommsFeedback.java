@@ -15,4 +15,6 @@ public interface NetworkCommsFeedback {
 	public void onLogoutComplete(boolean success);
 
 	public void onCheckComplete(String status);
+
+	public void onGotHoleDetails(String holeID, String distanceToPin, String par);
 }

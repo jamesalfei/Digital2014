@@ -26,5 +26,13 @@
     <string name="pleasegotohole">"Please go to hole "</string>
     <string name="didyouknow">Did you know?</string>
     <string name="distohole">Distance to hole:</string>
+    
+    <!-- Results Page String -->
+    <string name="date">Date</string>
+    <string name="score">Score</string>
+    <string name="weather">Weather</string>
+    
+    
+    
 
 </resources>

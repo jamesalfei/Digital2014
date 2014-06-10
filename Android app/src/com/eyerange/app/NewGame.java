@@ -27,7 +27,7 @@ public class NewGame extends Activity implements IBeaconConsumer {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.map);
+		setContentView(R.layout.new_game);
 
 		iBeaconManager.bind(this);
 		devices = new ArrayList<IBeacon>();

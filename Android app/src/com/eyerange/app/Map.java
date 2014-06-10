@@ -10,5 +10,4 @@ public class Map extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map);
 	}
-
 }

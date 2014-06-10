@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.radiusnetworks.ibeacon.IBeacon;
@@ -36,6 +37,7 @@ public class Holes extends Activity implements IBeaconConsumer,
 	Bundle i;
 	String holeID, distanceToPin, par = "";
 	String token;
+	Button weather, map, history;
 	TextView holeText, parText, descText, distText;
 
 	@Override
@@ -62,6 +64,10 @@ public class Holes extends Activity implements IBeaconConsumer,
 		parText = (TextView) findViewById(R.id.textPar);
 		descText = (TextView) findViewById(R.id.textDescription);
 		distText = (TextView) findViewById(R.id.textDistance);
+
+		weather = (Button) findViewById(R.id.weather);
+		map = (Button) findViewById(R.id.map);
+		history = (Button) findViewById(R.id.history);
 	}
 
 	@Override
@@ -175,7 +181,6 @@ public class Holes extends Activity implements IBeaconConsumer,
 				startActivity(i);
 			}
 		}
-
 	}
 
 	@Override

@@ -16,8 +16,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.radiusnetworks.ibeacon.IBeacon;
 import com.radiusnetworks.ibeacon.IBeaconConsumer;
@@ -44,9 +42,6 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 	Bundle i;
 	String token;
 
-	TextView authToken;
-	ListView list;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,7 +59,6 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 	}
 
 	private void setupComponents() {
-		list = (ListView) findViewById(R.id.iBeaconList);
 	}
 
 	@Override
@@ -103,7 +97,6 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 
 		arrayAdapter = new ArrayAdapter<String>(cont,
 				android.R.layout.simple_list_item_1, deviceNames);
-		list.setAdapter(arrayAdapter);
 	}
 
 	@Override
@@ -183,6 +176,5 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 				startActivity(i);
 			}
 		}
-
 	}
 }

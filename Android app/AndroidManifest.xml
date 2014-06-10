@@ -62,6 +62,10 @@
             android:name="com.eyerange.app.HoleActivity"
             android:label="@string/title_activity_hole" >
         </activity>
+        <activity
+            android:name="com.eyerange.app.GoToHole"
+            android:label="@string/title_activity_go_to_hole" >
+        </activity>
     </application>
 
 </manifest>

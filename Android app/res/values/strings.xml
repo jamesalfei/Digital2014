@@ -13,6 +13,8 @@
     <string name="description">Description:</string>
     <string name="title_activity_hole">Hole</string>
     <string name="register">Register</string>
-	<string name="submit">Submit</string>
-	<string name="notamember">Not a member? Tap Here</string>
+    <string name="submit">Submit</string>
+    <string name="notamember">Not a member? Tap Here</string>
+    <string name="title_activity_go_to_hole">GoToHole</string>
+
 </resources>

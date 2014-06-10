@@ -11,8 +11,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
         android:paddingTop="15dp"
-        android:text="@string/hole"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/hole"/>
 
     <TextView
         android:id="@+id/textPar"
@@ -20,8 +19,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
         android:paddingTop="15dp"
-        android:text="@string/par"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/par"/>
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -40,8 +38,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
                 android:paddingTop="15dp"
-                android:text="@string/description"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:text="@string/description"/>
         </LinearLayout>
     </ScrollView>
 

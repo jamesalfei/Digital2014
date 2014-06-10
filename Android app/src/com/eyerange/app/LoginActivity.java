@@ -62,7 +62,12 @@ public class LoginActivity extends Activity implements NetworkCommsFeedback {
 		// when logged in, go to Main activity
 		// new CheckLogin(token, feedback).execute();
 		if (success) {
-			startActivity(new Intent(this, MainActivity.class));
+			Intent i = new Intent(this, MainActivity.class);
+			Bundle b = new Bundle();
+			b.putString("token", token);
+			i.putExtras(b);
+			startActivity(i);
+			finish();
 		} else {
 			Toast.makeText(this, "Incorrect login details!", Toast.LENGTH_SHORT)
 					.show();
@@ -76,6 +81,5 @@ public class LoginActivity extends Activity implements NetworkCommsFeedback {
 	@Override
 	public void onCheckComplete(String status) {
 		Toast.makeText(this, status, Toast.LENGTH_LONG).show();
-
 	}
 }

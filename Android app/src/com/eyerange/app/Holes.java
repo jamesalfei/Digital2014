@@ -2,23 +2,21 @@ package com.eyerange.app;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 
 import networkUtilities.NetworkCommsFeedback;
 import utilities.Constants;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import backgroundTasks.GetHoleDetails;
 
 import com.radiusnetworks.ibeacon.IBeacon;
 import com.radiusnetworks.ibeacon.IBeaconConsumer;
@@ -36,8 +34,9 @@ public class Holes extends Activity implements IBeaconConsumer,
 	ArrayAdapter<String> arrayAdapter;
 	Bundle i;
 	String holeID, distanceToPin, par = "";
-	String token;
-	Button weather, map, history;
+	NetworkCommsFeedback feedback;
+	String token, major, minor;
+	ImageButton weather, map, history;
 	TextView holeText, parText, descText, distText;
 
 	@Override
@@ -47,9 +46,12 @@ public class Holes extends Activity implements IBeaconConsumer,
 
 		setupComponents();
 		cont = this;
+		feedback = this;
 
 		i = getIntent().getExtras();
 		token = i.getString("token");
+		major = i.getString("major");
+		minor = i.getString("minor");
 
 		// when start, get hole 1 from server
 		// then fill in the details of the text views (etc.)
@@ -57,6 +59,8 @@ public class Holes extends Activity implements IBeaconConsumer,
 		iBeaconManager.bind(this);
 		devices = new ArrayList<IBeacon>();
 		deviceNames = new ArrayList<String>();
+
+		new GetHoleDetails(token, major, minor, feedback).execute();
 	}
 
 	private void setupComponents() {
@@ -65,9 +69,9 @@ public class Holes extends Activity implements IBeaconConsumer,
 		descText = (TextView) findViewById(R.id.textDescription);
 		distText = (TextView) findViewById(R.id.textDistance);
 
-		weather = (Button) findViewById(R.id.weather);
-		map = (Button) findViewById(R.id.map);
-		history = (Button) findViewById(R.id.history);
+		weather = (ImageButton) findViewById(R.id.weather);
+		map = (ImageButton) findViewById(R.id.map);
+		history = (ImageButton) findViewById(R.id.history);
 	}
 
 	@Override
@@ -117,15 +121,6 @@ public class Holes extends Activity implements IBeaconConsumer,
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void sortList(ArrayList<IBeacon> devices) {
-		Collections.sort(devices, new Comparator<IBeacon>() {
-			@Override
-			public int compare(IBeacon s1, IBeacon s2) {
-				return Double.compare(s1.getAccuracy(), s2.getAccuracy());
-			}
-		});
-	}
-
 	@Override
 	public void onIBeaconServiceConnect() {
 		iBeaconManager.setRangeNotifier(new RangeNotifier() {
@@ -145,12 +140,9 @@ public class Holes extends Activity implements IBeaconConsumer,
 						}
 					}
 
-					sortList(devices);
-
 					checkDevices(devices);
 
 					runOnUiThread(new Runnable() {
-
 						@Override
 						public void run() {
 							updateList(devices);
@@ -174,11 +166,7 @@ public class Holes extends Activity implements IBeaconConsumer,
 					&& (dev.getMinor() == Constants.FIRST_MINOR)) {
 				// switch to holes tab when detected our first beacon and pass
 				// token.
-				Intent i = new Intent(this, Holes.class);
-				Bundle b = new Bundle();
-				b.putString("token", token);
-				i.putExtras(b);
-				startActivity(i);
+
 			}
 		}
 	}
@@ -204,9 +192,9 @@ public class Holes extends Activity implements IBeaconConsumer,
 	}
 
 	private void updateText() {
-		holeText.setText(holeID);
-		distText.setText(distanceToPin);
-		parText.setText(par);
+		holeText.setText("Hole: " + holeID);
+		distText.setText("Distance to pin: " + distanceToPin);
+		parText.setText("Par: " + par);
 
 	}
 }

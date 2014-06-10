@@ -2,8 +2,6 @@ package com.eyerange.app;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 
 import utilities.Constants;
@@ -86,19 +84,6 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 		return true;
 	}
 
-	private void updateList(ArrayList<IBeacon> device) {
-		for (IBeacon dev : device) {
-			if (dev.getAccuracy() > 0) {
-				deviceNames.add("Accuracy: " + dev.getAccuracy() + "m\n"
-						+ "UUID: " + dev.getProximityUuid() + "\n" + "Major: "
-						+ dev.getMajor() + "\n" + "Minor: " + dev.getMinor());
-			}
-		}
-
-		arrayAdapter = new ArrayAdapter<String>(cont,
-				android.R.layout.simple_list_item_1, deviceNames);
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -109,15 +94,6 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	private void sortList(ArrayList<IBeacon> devices) {
-		Collections.sort(devices, new Comparator<IBeacon>() {
-			@Override
-			public int compare(IBeacon s1, IBeacon s2) {
-				return Double.compare(s1.getAccuracy(), s2.getAccuracy());
-			}
-		});
 	}
 
 	@Override
@@ -138,18 +114,7 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 							devices.add(device);
 						}
 					}
-
-					sortList(devices);
-
 					checkDevices(devices);
-
-					runOnUiThread(new Runnable() {
-
-						@Override
-						public void run() {
-							updateList(devices);
-						}
-					});
 				}
 			}
 		});
@@ -172,8 +137,11 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 				Intent i = new Intent(this, Holes.class);
 				Bundle b = new Bundle();
 				b.putString("token", token);
+				b.putString("major", dev.getMajor() + "");
+				b.putString("minor", dev.getMinor() + "");
 				i.putExtras(b);
 				startActivity(i);
+				finish();
 			}
 		}
 	}

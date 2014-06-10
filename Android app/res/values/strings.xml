@@ -4,6 +4,7 @@
     <string name="app_name">EyeRange</string>
     <string name="hello_world">Hello world!</string>
     <string name="usernameHint">Username</string>
+    <string name="emailHint">Email</string>
     <string name="passwordHint">Password</string>
     <string name="passwordRetype">Retype Password</string>
     <string name="login">Login</string>

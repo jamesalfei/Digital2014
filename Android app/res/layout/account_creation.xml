@@ -20,18 +20,6 @@
         <requestFocus />
     </EditText>
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/username"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:background="@color/transWhite"
-        android:ems="10"
-        android:hint="@string/passwordHint"
-        android:inputType="textPassword" />
-
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -43,12 +31,37 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
+        android:id="@+id/emailBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/username"
+        android:layout_alignRight="@+id/username"
+        android:layout_below="@+id/username"
+        android:layout_marginTop="18dp"
+        android:background="@color/transWhite"
+        android:hint="@string/emailHint"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emailBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:background="@color/transWhite"
+        android:ems="10"
+        android:hint="@string/passwordHint"
+        android:inputType="textPassword" />
+
+    <EditText
         android:id="@+id/passwordTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/password"
         android:layout_below="@+id/password"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="18dp"
         android:background="@color/transWhite"
         android:ems="10"
         android:hint="@string/passwordRetype"
@@ -60,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordTwo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="26dp"
         android:background="@color/titleGreen"
         android:text="@string/submit" />
 

@@ -8,15 +8,17 @@ import networkUtilities.NetworkCommsFeedback;
 import utilities.Constants;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import backgroundTasks.GetHoleDetails;
 
 import com.radiusnetworks.ibeacon.IBeacon;
 import com.radiusnetworks.ibeacon.IBeaconConsumer;
@@ -33,7 +35,7 @@ public class Holes extends Activity implements IBeaconConsumer,
 	Context cont;
 	ArrayAdapter<String> arrayAdapter;
 	Bundle i;
-	String holeID, distanceToPin, par = "";
+	String holeID, distanceToPin, par, desc = "";
 	NetworkCommsFeedback feedback;
 	String token, major, minor;
 	ImageButton weather, map, history;
@@ -49,18 +51,44 @@ public class Holes extends Activity implements IBeaconConsumer,
 		feedback = this;
 
 		i = getIntent().getExtras();
-		token = i.getString("token");
 		major = i.getString("major");
 		minor = i.getString("minor");
-
-		// when start, get hole 1 from server
-		// then fill in the details of the text views (etc.)
 
 		iBeaconManager.bind(this);
 		devices = new ArrayList<IBeacon>();
 		deviceNames = new ArrayList<String>();
 
-		new GetHoleDetails(token, major, minor, feedback).execute();
+		addActionListeners();
+
+		// new GetHoleDetails(token, major, minor, feedback, cont).execute();
+		addDummyDetails();
+	}
+
+	private void addActionListeners() {
+		map.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(cont, Map.class));
+			}
+		});
+	}
+
+	private void addDummyDetails() {
+		holeText.append("1");
+		distText.append("465y");
+		parText.append("4");
+		descText.append("A long par 4 with a right to left dog-leg, this is a "
+				+ "very challenging opening hole. Attempts to squeeze your drive "
+				+ "up the left hand side of the fairway to secure the most "
+				+ "straightforward approach to the green will be threatened by the "
+				+ "presence of a cluster of deep bunkers at the inside elbow of the "
+				+ "dog-leg. Aiming for the right of the fairway, however although "
+				+ "safer because it avoids the traps, will leave a tougher approach, "
+				+ "as the second shot will have to clear further bunkers that guard "
+				+ "the right hand side of the green. The putting surface itself is "
+				+ "angled to reward those that take the riskier approach off the "
+				+ "tree and succeed.");
 	}
 
 	private void setupComponents() {
@@ -162,11 +190,18 @@ public class Holes extends Activity implements IBeaconConsumer,
 
 	protected void checkDevices(ArrayList<IBeacon> devices) {
 		for (IBeacon dev : devices) {
-			if ((dev.getMajor() == Constants.FIRST_MAJOR)
-					&& (dev.getMinor() == Constants.FIRST_MINOR)) {
+			if ((dev.getMajor() == Constants.SECOND_MAJOR)
+					&& ((dev.getMinor() == Constants.SECOND_MINOR) && (dev
+							.getAccuracy() < Constants.DISTANCE))) {
 				// switch to holes tab when detected our first beacon and pass
 				// token.
-
+				Intent i = new Intent(this, Result.class);
+				Bundle b = new Bundle();
+				b.putString("major", dev.getMajor() + "");
+				b.putString("minor", dev.getMinor() + "");
+				i.putExtras(b);
+				startActivity(i);
+				finish();
 			}
 		}
 	}
@@ -184,17 +219,19 @@ public class Holes extends Activity implements IBeaconConsumer,
 	}
 
 	@Override
-	public void onGotHoleDetails(String holeID, String distanceToPin, String par) {
+	public void onGotHoleDetails(String holeID, String distanceToPin,
+			String par, String desc) {
 		this.holeID = holeID;
 		this.distanceToPin = distanceToPin;
 		this.par = par;
+		this.desc = desc;
 		updateText();
 	}
 
 	private void updateText() {
-		holeText.setText("Hole: " + holeID);
-		distText.setText("Distance to pin: " + distanceToPin);
-		parText.setText("Par: " + par);
-
+		holeText.append(holeID);
+		distText.append(distanceToPin);
+		parText.append(par);
+		descText.append(desc);
 	}
 }

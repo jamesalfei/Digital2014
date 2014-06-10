@@ -1,10 +1,14 @@
 package com.eyerange.app;
 
+import android.app.Activity;
+import android.os.Bundle;
+
 //TODO: This class!
-public class RegisterUser {
+public class RegisterUser extends Activity {
 
-	public RegisterUser() {
-		// TODO Auto-generated constructor stub
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.account_creation);
 	}
-
 }

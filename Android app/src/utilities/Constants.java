@@ -8,6 +8,7 @@ public class Constants {
 
 	// URLs
 	public static final String URL_API = "http://eyerange.co.uk/api/";
+	public static final String URL_BEACON = "http://eyerange.co.uk/api/beacon.php";
 
 	// API Tokens
 	public static final String TAG_AUTH = "usrToken";
@@ -35,4 +36,7 @@ public class Constants {
 	public static final int FIRST_MINOR = 8;
 	public static final int SECOND_MAJOR = 1;
 	public static final int SECOND_MINOR = 9;
+
+	// distance
+	public static final double DISTANCE = 0.5;
 }

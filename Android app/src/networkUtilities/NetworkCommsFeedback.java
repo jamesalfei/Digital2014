@@ -16,5 +16,6 @@ public interface NetworkCommsFeedback {
 
 	public void onCheckComplete(String status);
 
-	public void onGotHoleDetails(String holeID, String distanceToPin, String par);
+	public void onGotHoleDetails(String holeID, String distanceToPin,
+			String par, String desc);
 }

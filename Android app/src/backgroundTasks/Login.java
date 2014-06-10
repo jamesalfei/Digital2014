@@ -83,5 +83,4 @@ public class Login extends AsyncTask<String, String, String> {
 	protected void onPostExecute(String file_url) {
 		response.onLoginComplete(success, userID);
 	}
-
 }

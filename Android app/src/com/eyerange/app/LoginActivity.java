@@ -119,6 +119,7 @@ public class LoginActivity extends Activity implements NetworkCommsFeedback {
 	}
 
 	@Override
-	public void onGotHoleDetails(String holeID, String distanceToPin, String par) {
+	public void onGotHoleDetails(String holeID, String distanceToPin,
+			String par, String desc) {
 	}
 }

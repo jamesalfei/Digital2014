@@ -1,25 +1,15 @@
 package com.eyerange.app;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
-import utilities.Constants;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-
-import com.radiusnetworks.ibeacon.IBeacon;
-import com.radiusnetworks.ibeacon.IBeaconConsumer;
-import com.radiusnetworks.ibeacon.IBeaconManager;
-import com.radiusnetworks.ibeacon.RangeNotifier;
-import com.radiusnetworks.ibeacon.Region;
+import android.widget.Button;
 
 /**
  * Class will be shown after login and will start detecting ibeacons (possibly
@@ -29,31 +19,32 @@ import com.radiusnetworks.ibeacon.Region;
  * 
  * @author James Alfei
  */
-public class MainActivity extends Activity implements IBeaconConsumer {
+public class MainActivity extends Activity {
 
-	private final IBeaconManager iBeaconManager = IBeaconManager
-			.getInstanceForApplication(this);
-	private ArrayList<IBeacon> devices;
-	ArrayList<String> deviceNames;
 	Context cont;
 	ArrayAdapter<String> arrayAdapter;
 	Bundle i;
 	String token;
+	Button b;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.main_menu);
 
 		setupComponents();
 		cont = this;
 
 		i = getIntent().getExtras();
 		token = i.getString("token");
+		b = (Button) findViewById(R.id.newGameButton);
+		b.setOnClickListener(new OnClickListener() {
 
-		iBeaconManager.bind(this);
-		devices = new ArrayList<IBeacon>();
-		deviceNames = new ArrayList<String>();
+			@Override
+			public void onClick(View v) {
+				cont.startActivity(new Intent(cont, NewGame.class));
+			}
+		});
 	}
 
 	private void setupComponents() {
@@ -62,19 +53,16 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		iBeaconManager.unBind(this);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		iBeaconManager.unBind(this);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		iBeaconManager.bind(this);
 	}
 
 	@Override
@@ -94,55 +82,5 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public void onIBeaconServiceConnect() {
-		iBeaconManager.setRangeNotifier(new RangeNotifier() {
-			@Override
-			public void didRangeBeaconsInRegion(Collection<IBeacon> arg0,
-					Region arg1) {
-
-				devices.clear();
-				deviceNames.clear();
-
-				if (arg0.size() > 0) {
-					Iterator<IBeacon> itt = arg0.iterator();
-					while (itt.hasNext()) {
-						IBeacon device = itt.next();
-						if (!devices.contains(device)) {
-							devices.add(device);
-						}
-					}
-					checkDevices(devices);
-				}
-			}
-		});
-
-		try {
-			iBeaconManager.startRangingBeaconsInRegion(new Region(
-					"myRangingUniqueId", null, null, null));
-		} catch (RemoteException e) {
-			Log.e("iBeacon Service", "Unable to start ranging service.");
-		}
-	}
-
-	protected void checkDevices(ArrayList<IBeacon> devices) {
-		for (IBeacon dev : devices) {
-			if ((dev.getMajor() == Constants.FIRST_MAJOR)
-					&& ((dev.getMinor() == Constants.FIRST_MINOR) && (dev
-							.getAccuracy() < 1))) {
-				// switch to holes tab when detected our first beacon and pass
-				// token.
-				Intent i = new Intent(this, Holes.class);
-				Bundle b = new Bundle();
-				b.putString("token", token);
-				b.putString("major", dev.getMajor() + "");
-				b.putString("minor", dev.getMinor() + "");
-				i.putExtras(b);
-				startActivity(i);
-				finish();
-			}
-		}
 	}
 }

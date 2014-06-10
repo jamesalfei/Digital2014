@@ -20,8 +20,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.eyerange.app.LoginActivity"
-            android:label="@string/app_name"
-            android:noHistory="true" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,16 +58,14 @@
         </service>
 
         <activity
-            android:name="com.eyerange.app.HoleActivity"
-            android:label="@string/title_activity_hole" >
-        </activity>
-        <activity
-            android:name="com.eyerange.app.GoToHole"
-            android:label="@string/title_activity_go_to_hole" >
-        </activity>
-        <activity
-            android:name="com.eyerange.app.Result"
+            android:name="Result"
             android:label="@string/title_activity_result" >
+        </activity>
+        <activity android:name="Holes" >
+        </activity>
+        <activity android:name="Map" >
+        </activity>
+        <activity android:name="RegisterUser" >
         </activity>
     </application>
 

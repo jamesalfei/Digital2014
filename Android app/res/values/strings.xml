@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">EyeRange</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="usernameHint">Username</string>
+    <string name="passwordHint">Password</string>
+    <string name="passwordRetype">Retype Password</string>
+    <string name="login">Login</string>
+    <string name="action_settings">Settings</string>
+    <string name="hole">Hole:</string>
+    <string name="par">Par:</string>
+    <string name="description">Description:</string>
+    <string name="title_activity_hole">Hole</string>
+    <!-- Login Page Strings -->
+    <string name="notamember">Not a member? Tap Here</string>
+    <!-- Register Page Strings -->
+    <string name="register">Register</string>
+    <string name="submit">Submit</string>
+    <!-- Main menu Strings -->
+    <string name="newGame">New Game</string>
+    <string name="myStats">My Statistics</string>
+    <!-- Image Description Strings -->
+    <string name="imageDescription">Banging Image Bro</string>
+    <string name="title_activity_go_to_hole">GoToHole</string>
+    <string name="pleasegotohole">"Please go to hole "</string>
+    <string name="didyouknow">Did you know?</string>
+    <string name="distohole">Distance to hole:</string>
+
+</resources>

@@ -15,4 +15,10 @@
     <string name="register">Register</string>
 	<string name="submit">Submit</string>
 	<string name="notamember">Not a member? Tap Here</string>
+	<!-- Main menu Strings -->
+	<string name="newGame">New Game</string>
+	<string name="myStats">My Statistics</string>
+	<!-- Image Description Strings -->
+	<string name="imageDescription">Banging Image Bro</string>
+	
 </resources>

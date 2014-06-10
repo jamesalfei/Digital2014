@@ -38,6 +38,7 @@
         android:background="@color/titleGreen"
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
+        android:enabled="false"
         android:layout_marginTop="20dp"
         android:text="@string/login" />
 
@@ -50,7 +51,7 @@
         android:layout_marginTop="15dp"
         android:onClick="goToRegister"
         android:text="@string/notamember"
-        android:color="@color/white"
+        android:textColor="@color/white"
         android:textAppearance="?android:attr/textAppearanceSmall"/>
 
 </RelativeLayout>

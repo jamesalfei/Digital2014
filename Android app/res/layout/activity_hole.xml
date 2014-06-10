@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
         android:paddingTop="15dp"
-        android:text="@string/hole"/>
+        android:text="@string/hole" />
 
     <TextView
         android:id="@+id/textPar"
@@ -19,15 +19,15 @@
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
         android:paddingTop="15dp"
-        android:text="@string/par"/>
-    
-     <TextView
-         android:id="@+id/textdisttohole"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:paddingLeft="15dp"
-         android:paddingTop="15dp"
-         android:text="@string/distohole" />
+        android:text="@string/par" />
+
+    <TextView
+        android:id="@+id/textDistance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:text="@string/distohole" />
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
                 android:paddingTop="15dp"
-                android:text="@string/description"/>
+                android:text="@string/description" />
         </LinearLayout>
     </ScrollView>
 

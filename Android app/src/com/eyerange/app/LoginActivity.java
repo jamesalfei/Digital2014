@@ -82,4 +82,8 @@ public class LoginActivity extends Activity implements NetworkCommsFeedback {
 	public void onCheckComplete(String status) {
 		Toast.makeText(this, status, Toast.LENGTH_LONG).show();
 	}
+
+	@Override
+	public void onGotHoleDetails(String holeID, String distanceToPin, String par) {
+	}
 }
